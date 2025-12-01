@@ -11,7 +11,7 @@ const PropertyDetails = () => {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/properties/${id}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/properties/${id}`);
         setProperty(res.data);
       } catch (error) {
         console.error("Error fetching property:", error);
