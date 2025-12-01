@@ -4,12 +4,19 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import propertyRoutes from './routes/propertyRoutes.js';
 import authRoutes from './routes/authRoutes.js';
+import mongoose from 'mongoose';
 
 dotenv.config();
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log(" MongoDB connected"))
+  .catch((err) => console.error(" MongoDB error:", err));
+
 app.use('/api/auth', authRoutes);
 console.log("Auth routes mounted at /api/auth");
 
