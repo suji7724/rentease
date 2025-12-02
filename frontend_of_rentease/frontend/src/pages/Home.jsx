@@ -4,17 +4,19 @@ import PropertyForm from "../components/PropertyForm";
 import PropertyList from "../components/PropertyList";
 import Footer from "../components/Footer";
 import logo from "../assets/rentease-logo.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [properties, setProperties] = useState([]);
   const [activeTab, setActiveTab] = useState("add"); //  Track which section is open
 
   //logout function
+  const navigate = useNavigate();
   const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
   localStorage.removeItem("loginTime");
-  window.location.href = "/login";
+  navigate("/login", {replace: true});
 };
 
 
