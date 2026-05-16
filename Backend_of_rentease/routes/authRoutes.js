@@ -1,22 +1,53 @@
 import express from "express";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
-  const { name, email, password } = req.body;
+  try {
 
-  const existing = await User.findOne({ email });
-  if (existing) return res.status(400).json({ message: "User already exists" });
+    console.log(req.body);
 
-  const hashedPassword = await bcrypt.hash(password, 10);
+    const { name, email, password } = req.body;
 
-  const user = new User({ name, email, password: hashedPassword });
-  await user.save();
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        message: "All fields are required"
+      });
+    }
 
-  res.json({ message: "Signup successful" });
+    const existing = await User.findOne({ email });
+
+    if (existing) {
+      return res.status(400).json({
+        message: "User already exists"
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = new User({
+      name,
+      email,
+      password: hashedPassword
+    });
+
+    await user.save();
+
+    res.status(201).json({
+      message: "Signup successful"
+    });
+
+  } catch (error) {
+
+    console.error("Signup Error:", error);
+
+    res.status(500).json({
+      message: error.message
+    });
+  }
 });
 
 router.post("/login", async (req, res) => {

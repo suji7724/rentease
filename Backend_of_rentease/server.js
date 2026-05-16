@@ -12,16 +12,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log(" MongoDB connected"))
-  .catch((err) => console.error(" MongoDB error:", err));
+connectDB();
 
 app.use('/api/auth', authRoutes);
 console.log("Auth routes mounted at /api/auth");
 
-
-connectDB();
 
 app.use('/api/properties', propertyRoutes);
 
