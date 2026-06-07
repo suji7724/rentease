@@ -74,7 +74,9 @@
 
 ## 📸 Screenshots
 
-**
+*<img width="1366" height="768" alt="2026-06-07" src="https://github.com/user-attachments/assets/ad3b147f-9040-457f-8ee6-a33d498d90f4" />
+*<img width="1366" height="768" alt="2026-06-07 (2)" src="https://github.com/user-attachments/assets/247f24a0-41d2-4d30-9217-42c6449ec0f4" />
+
 
 ---
 
